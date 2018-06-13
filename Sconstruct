@@ -1,0 +1,18 @@
+import os
+
+compiler='g++'
+compilerVer='-std=c++14'
+target='game.out'
+srcDirectory='./src'
+includeDirectory='./include'
+srcfiles=Glob(srcDirectory+'/*.cpp')
+
+file_match = "*.cpp"
+
+build=Environment(CXX=compiler,CPPFLAGS=compilerVer)
+build['ENV']['TERM'] = os.environ['TERM']
+build.Append(LIBS = ["sfml-graphics","sfml-window","sfml-system","sfml-audio"]);
+build.Append(LIBPATH = "/usr/local/lib");
+build.Append(CPPPATH=[includeDirectory])
+build.Append(CPPFLAGS=['-Wall', '-Wextra', '-g'])
+build.Program(target,srcfiles)
